@@ -31,24 +31,39 @@ ubicaciones: {
 }
 
 ];
-
+// funcion para agregar
 function agregarContacto (nuevoContacto){
    listadecontactos.push(nuevoContacto);
 };
-
+// funcion para borrar 
 function borrarContacto (id){
     listadecontactos= listadecontactos.filter(contacto => contacto.id !== id );
  };
 
-// funcion para imprimir y actualizar
+// funcion para imprimir 
 
 function imprimirContactos() {
     console.log("Lista de contactos:");
     listadecontactos.forEach(contacto => {
         console.log(`id: ${contacto.id}, nombre: ${contacto.nombres} ${contacto.apellidos}, teléfono: ${contacto.telefono}, ubicación: ciudad - ${contacto.ubicaciones.ciudad}, dirección - ${contacto.ubicaciones.direccion}`);
     });
-}
+};
     
+// funcion para actualizar
+
+function actualizarContacto(id,campo,nuevoValor){
+    const contacto = listadecontactos.find(c => c.id === id);
+    if (contacto) {
+        if (campo === 'nombres' || campo === 'apellidos' || campo === 'telefono') {
+            contacto[campo] = nuevoValor;
+        } else if (campo === 'ciudad' || campo === 'direccion') {
+            contacto.ubicaciones[campo] = nuevoValor;
+        } else {
+            console.log("Campo inválido para actualizar");
+        }
+        };
+
+};
 
 console.log("lista inicial");
 imprimirContactos();
@@ -73,3 +88,10 @@ borrarContacto(1235918465);
 console.log("\n lista despues de eliminar un contacto:");
 
 imprimirContactos();
+
+
+actualizarContacto(100162516516, "ciudad", "estados unidos");
+console.log("\n lista actualizada:");
+
+imprimirContactos();
+
